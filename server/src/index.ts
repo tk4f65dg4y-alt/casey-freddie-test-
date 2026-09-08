@@ -15,7 +15,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-const VALID_THEMES = ["cream", "obsidian"];
+const VALID_THEMES = ["cream", "obsidian", "emerald", "blush", "navy", "terracotta", "violet", "sky"];
 
 // The site's copy (not just its services/prices/colour) is configurable
 // per deployment too, the same way — an env var override with a default

@@ -28,6 +28,12 @@ const DEFAULT_CONFIG: Config = {
 const FAVICONS: Record<string, string> = {
   cream: "💇",
   obsidian: "🏋️",
+  emerald: "🌿",
+  blush: "🌸",
+  navy: "💼",
+  terracotta: "🏺",
+  violet: "🔮",
+  sky: "🌤️",
 };
 
 const ConfigContext = createContext<Config>(DEFAULT_CONFIG);

@@ -70,14 +70,26 @@ these environment variables on the service:
   Omit it to get the default hairdresser services. Example for a personal
   trainer:
   `[{"name":"1-to-1 Session","description":"A full-hour personal training session.","priceCents":4500,"durationMin":60}]`
-- `THEME` (optional) — `cream` (default) is the soft cream/gold hairdresser
-  look; `obsidian` is a black/gold premium look with bold condensed
-  uppercase headings, for a more masculine/gym-style business. Applied at
-  runtime (no rebuild needed) — the server reads it into `/api/config` and
-  the frontend sets `data-theme` on `<html>`, which `styles.css` has a full
-  `:root[data-theme="obsidian"]` override block for. Add a new theme the
-  same way: a new named override block, plus a line in `FAVICONS` in
-  `web/src/context.tsx` if it wants its own favicon emoji.
+- `THEME` (optional) — eight options, each a genuinely different palette +
+  typeface pairing, not just a recolor:
+  - `cream` (default) — soft cream & gold, upright serif. Elegant, warm. Hairdresser/beauty.
+  - `obsidian` — black & gold, bold condensed uppercase. Premium, masculine. Gym/PT.
+  - `emerald` — black & deep green, condensed normal-case. Premium, calm. Wellness/eco/finance/barber.
+  - `blush` — soft pink, italic serif. Romantic. Bridal/beauty/boutique.
+  - `navy` — white & royal blue, serif display. Trustworthy, professional. Consulting/tutoring.
+  - `terracotta` — clay & cream, slab serif. Warm, artisan. Craft/coffee/studio.
+  - `violet` — moody purple, geometric sans. Bold, glam. Creative/events/nightlife.
+  - `sky` — light blue & white, rounded sans. Fresh, friendly. Family/kids coaching.
+
+  Applied at runtime (no rebuild needed) — the server reads it into
+  `/api/config` and the frontend sets `data-theme` on `<html>`, which
+  `styles.css` has a full `:root[data-theme="..."]` override block for
+  each one. Add a new theme the same way: a new named override block
+  (color tokens + `--heading-font`/`--heading-weight`/`--heading-tracking`/
+  `--heading-transform`/`--btn-radius`), the theme name added to
+  `VALID_THEMES` in `server/src/index.ts`, a Google Fonts import in
+  `web/index.html` if it needs a new typeface, and a line in `FAVICONS` in
+  `web/src/context.tsx` for its favicon emoji.
 - `HERO_TAGLINE`, `HERO_LEDE`, `ABOUT_BIO`, `HOURS_LINE1`, `HOURS_LINE2`
   (all optional strings) — the hero heading, the sentence under it, the
   About paragraph (first-person, "I ..."), and the two footer hours lines.
