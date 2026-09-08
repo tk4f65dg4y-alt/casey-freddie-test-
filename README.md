@@ -78,6 +78,15 @@ these environment variables on the service:
   `:root[data-theme="obsidian"]` override block for. Add a new theme the
   same way: a new named override block, plus a line in `FAVICONS` in
   `web/src/context.tsx` if it wants its own favicon emoji.
+- `HERO_TAGLINE`, `HERO_LEDE`, `ABOUT_BIO`, `HOURS_LINE1`, `HOURS_LINE2`
+  (all optional strings) — the hero heading, the sentence under it, the
+  About paragraph (first-person, "I ..."), and the two footer hours lines.
+  All default to Gaby's original copy if omitted, so write these fresh for
+  every real business — nothing here should read as leftover hairdresser
+  content.
+- `TESTIMONIALS` (optional) — a JSON array of `{ "quote": "...", "name": "..." }`.
+- `TRUST_STATS` (optional) — a JSON array of `{ "value": "8+", "label": "Years experience" }`
+  shown as the four stats under the hero.
 
 The root `npm run build` builds both the web app and the server; `npm start`
 runs `prisma migrate deploy` then starts the server, which serves the built
