@@ -70,6 +70,14 @@ these environment variables on the service:
   Omit it to get the default hairdresser services. Example for a personal
   trainer:
   `[{"name":"1-to-1 Session","description":"A full-hour personal training session.","priceCents":4500,"durationMin":60}]`
+- `THEME` (optional) — `cream` (default) is the soft cream/gold hairdresser
+  look; `obsidian` is a black/gold premium look with bold condensed
+  uppercase headings, for a more masculine/gym-style business. Applied at
+  runtime (no rebuild needed) — the server reads it into `/api/config` and
+  the frontend sets `data-theme` on `<html>`, which `styles.css` has a full
+  `:root[data-theme="obsidian"]` override block for. Add a new theme the
+  same way: a new named override block, plus a line in `FAVICONS` in
+  `web/src/context.tsx` if it wants its own favicon emoji.
 
 The root `npm run build` builds both the web app and the server; `npm start`
 runs `prisma migrate deploy` then starts the server, which serves the built

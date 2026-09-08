@@ -153,7 +153,7 @@ export default function AdminSchedule() {
             className="cal-legend-swatch"
             style={{
               background:
-                "repeating-linear-gradient(135deg, rgba(228,216,191,0.6), rgba(228,216,191,0.6) 3px, transparent 3px, transparent 6px)",
+                "repeating-linear-gradient(135deg, color-mix(in srgb, var(--line) 70%, transparent), color-mix(in srgb, var(--line) 70%, transparent) 3px, transparent 3px, transparent 6px)",
               border: "1px solid var(--line)",
             }}
           />

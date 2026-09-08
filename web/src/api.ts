@@ -18,6 +18,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 export interface Config {
   businessName: string;
   adminName: string;
+  theme: string;
 }
 
 export interface Service {

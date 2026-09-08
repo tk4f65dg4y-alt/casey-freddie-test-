@@ -15,10 +15,14 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+const VALID_THEMES = ["cream", "obsidian"];
+
 app.get("/api/config", (_req, res) => {
+  const theme = process.env.THEME || "cream";
   res.json({
     businessName: process.env.BUSINESS_NAME || "Gaby's Hair Studio",
     adminName: process.env.ADMIN_NAME || "Gaby",
+    theme: VALID_THEMES.includes(theme) ? theme : "cream",
   });
 });
 

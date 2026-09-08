@@ -16,8 +16,47 @@
   --pending-bg: #f4ecd9;
   --pending-fg: #8a6a3d;
   --radius: 14px;
+  --btn-radius: 999px;
+  --heading-font: "Cormorant Garamond", Georgia, serif;
+  --heading-weight: 600;
+  --heading-tracking: 0.01em;
+  --heading-transform: none;
+  --glow: rgba(201, 163, 95, 0.14);
+  --glow-soft: rgba(201, 163, 95, 0.1);
   --shadow: 0 10px 30px -12px rgba(44, 38, 32, 0.18);
   --shadow-lg: 0 24px 60px -20px rgba(44, 38, 32, 0.28);
+}
+
+/* Obsidian: a black, gold-on-black theme for a premium, masculine, gym-style
+   business (e.g. a personal trainer) — set via the THEME env var, applied
+   as data-theme on <html> at runtime. The cream theme above stays the
+   default for everyone who doesn't set THEME. */
+:root[data-theme="obsidian"] {
+  --cream: #0e0e0e;
+  --cream-deep: #1a1a1a;
+  --paper: #18181b;
+  --ink: #f2f0ea;
+  --ink-soft: #a39c8f;
+  --gold: #c9a227;
+  --gold-deep: #a9841e;
+  --gold-pale: #2a2313;
+  --gold-bright: #e6c14d;
+  --line: #2c2a24;
+  --success: #7cbf8a;
+  --success-bg: #16241a;
+  --danger: #e08579;
+  --danger-bg: #2a1512;
+  --pending-bg: #241c0f;
+  --pending-fg: #d7b06a;
+  --btn-radius: 8px;
+  --heading-font: "Oswald", "Arial Narrow", sans-serif;
+  --heading-weight: 600;
+  --heading-tracking: 0.02em;
+  --heading-transform: uppercase;
+  --glow: rgba(201, 162, 39, 0.16);
+  --glow-soft: rgba(201, 162, 39, 0.1);
+  --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 0 0 1px rgba(201, 162, 39, 0.15), 0 24px 50px -20px rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -32,12 +71,13 @@ body {
 
 body {
   background:
-    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201, 163, 95, 0.14), transparent 60%),
-    radial-gradient(ellipse 700px 500px at 100% 0%, rgba(201, 163, 95, 0.1), transparent 55%),
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--glow), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 0%, var(--glow-soft), transparent 55%),
     var(--cream);
   color: var(--ink);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease;
 }
 
 .ornament {
@@ -66,9 +106,10 @@ h1,
 h2,
 h3,
 .serif {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  text-transform: var(--heading-transform);
   color: var(--ink);
   margin: 0;
 }
@@ -103,6 +144,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: 1rem;
+  color: inherit;
 }
 
 .container {
@@ -116,7 +158,7 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(250, 246, 238, 0.88);
+  background: color-mix(in srgb, var(--cream) 88%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -130,7 +172,7 @@ textarea {
 }
 
 .brand {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -311,7 +353,7 @@ textarea {
   justify-content: center;
   gap: 8px;
   padding: 13px 26px;
-  border-radius: 999px;
+  border-radius: var(--btn-radius);
   border: 1px solid transparent;
   font-weight: 600;
   font-size: 0.95rem;
@@ -443,7 +485,7 @@ textarea {
 
 .trust-stat strong {
   display: block;
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 2.1rem;
   font-weight: 600;
   color: var(--gold-deep);
@@ -474,7 +516,7 @@ textarea {
 }
 
 .testimonial-card p.quote {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-style: italic;
   font-size: 1.2rem;
   color: var(--ink);
@@ -553,7 +595,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-weight: 600;
   font-size: 1.1rem;
   margin-bottom: 6px;
@@ -567,7 +609,7 @@ textarea {
 }
 
 .service-price {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--gold-deep);
@@ -609,7 +651,7 @@ textarea {
 }
 
 .footer-col h4 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 1.05rem;
   color: var(--ink);
   margin-bottom: 14px;
@@ -740,7 +782,7 @@ textarea {
 }
 
 .day-group h4 {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 1.15rem;
   margin-bottom: 10px;
   color: var(--ink);
@@ -1043,7 +1085,7 @@ th {
 }
 
 .cal-week-label {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 1.25rem;
   font-weight: 600;
 }
@@ -1137,7 +1179,7 @@ th {
 }
 
 .cal-day-num {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--heading-font);
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--ink);
@@ -1177,8 +1219,8 @@ th {
   cursor: default;
   background: repeating-linear-gradient(
     135deg,
-    rgba(228, 216, 191, 0.35),
-    rgba(228, 216, 191, 0.35) 6px,
+    color-mix(in srgb, var(--line) 70%, transparent),
+    color-mix(in srgb, var(--line) 70%, transparent) 6px,
     transparent 6px,
     transparent 12px
   );
@@ -1187,8 +1229,8 @@ th {
 .cal-cell.is-past:hover {
   background: repeating-linear-gradient(
     135deg,
-    rgba(228, 216, 191, 0.35),
-    rgba(228, 216, 191, 0.35) 6px,
+    color-mix(in srgb, var(--line) 70%, transparent),
+    color-mix(in srgb, var(--line) 70%, transparent) 6px,
     transparent 6px,
     transparent 12px
   );
