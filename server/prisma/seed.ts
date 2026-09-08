@@ -70,6 +70,7 @@ async function main() {
   console.log(`Admin ready: ${adminEmail}`);
 
   const existingServices = await prisma.service.count();
+  console.log(`Services already in DB: ${existingServices}`);
   if (existingServices === 0) {
     const services = loadServices();
     await prisma.service.createMany({
@@ -79,6 +80,7 @@ async function main() {
   }
 
   const existingSlots = await prisma.slot.count();
+  console.log(`Slots already in DB: ${existingSlots}`);
   if (existingSlots === 0) {
     const slotsToCreate: { startsAt: Date; durationMin: number }[] = [];
     const now = new Date();
@@ -101,6 +103,8 @@ async function main() {
     await prisma.slot.createMany({ data: slotsToCreate });
     console.log(`Seeded ${slotsToCreate.length} open slots.`);
   }
+
+  console.log("Seed complete.");
 }
 
 main()
