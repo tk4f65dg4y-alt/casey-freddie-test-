@@ -61,3 +61,7 @@ your Postgres service), `JWT_SECRET` (a long random string), `ADMIN_EMAIL`,
 Studio"). The root `npm run build` builds both the web app and the server;
 `npm start` runs `prisma migrate deploy` then starts the server, which
 serves the built frontend and the API from one process/port.
+
+On a platform with a separate pre-deploy step (e.g. Railway), run the
+migration and seed there, in that order:
+`npx prisma migrate deploy --schema=server/prisma/schema.prisma && npm run seed --prefix server`.
