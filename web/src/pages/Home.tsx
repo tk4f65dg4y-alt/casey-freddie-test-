@@ -6,7 +6,7 @@ import { api, Service, formatPrice, formatDuration } from "../api";
 import { useConfig } from "../context";
 
 export default function Home() {
-  const { businessName, adminName } = useConfig();
+  const { adminName, heroTagline, heroLede, aboutBio, testimonials, trustStats } = useConfig();
   const [services, setServices] = useState<Service[] | null>(null);
 
   useEffect(() => {
@@ -20,14 +20,8 @@ export default function Home() {
       <section className="hero">
         <div className="container">
           <span className="hero-eyebrow">Est. by {adminName}</span>
-          <h1>Beautiful hair,
-            <br />
-            booked in minutes.
-          </h1>
-          <p className="lede">
-            {businessName} is a quiet, cream-toned studio for cuts, colour, and styling.
-            See what's on offer, pick a time that suits you, and we'll take it from there.
-          </p>
+          <h1>{heroTagline}</h1>
+          <p className="lede">{heroLede}</p>
           <div className="hero-actions">
             <Link to="/book" className="btn btn-primary">
               Book an appointment
@@ -40,22 +34,12 @@ export default function Home() {
       </section>
 
       <section className="trust-strip container">
-        <div className="trust-stat">
-          <strong>8+</strong>
-          <span>Years experience</span>
-        </div>
-        <div className="trust-stat">
-          <strong>500+</strong>
-          <span>Happy clients</span>
-        </div>
-        <div className="trust-stat">
-          <strong>5.0★</strong>
-          <span>Average rating</span>
-        </div>
-        <div className="trust-stat">
-          <strong>100%</strong>
-          <span>Booked online</span>
-        </div>
+        {trustStats.map((stat) => (
+          <div className="trust-stat" key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
       </section>
 
       <section id="services" className="section section-alt">
@@ -101,11 +85,7 @@ export default function Home() {
           <div className="section-head">
             <span className="hero-eyebrow">About</span>
             <h2>Hi, I'm {adminName}</h2>
-            <p>
-              I opened {businessName} to slow things down — one client at a time, in a calm
-              space, with time taken to actually listen to what you want. Every appointment
-              below is a real open slot in my diary, so book whenever suits.
-            </p>
+            <p>{aboutBio}</p>
           </div>
         </div>
       </section>
@@ -120,21 +100,13 @@ export default function Home() {
             </div>
           </div>
           <div className="testimonial-grid">
-            <div className="testimonial-card">
-              <div className="stars">★★★★★</div>
-              <p className="quote">"Booked in thirty seconds and the colour was exactly what I asked for. Can't go back to phone bookings now."</p>
-              <div className="testimonial-name">— Freya M.</div>
-            </div>
-            <div className="testimonial-card">
-              <div className="stars">★★★★★</div>
-              <p className="quote">"Calm, unrushed, and genuinely lovely results. It feels like a proper treat every time."</p>
-              <div className="testimonial-name">— Priya S.</div>
-            </div>
-            <div className="testimonial-card">
-              <div className="stars">★★★★★</div>
-              <p className="quote">"Loved seeing the price before I booked — no awkward surprises at the till."</p>
-              <div className="testimonial-name">— Aisha K.</div>
-            </div>
+            {testimonials.map((t) => (
+              <div className="testimonial-card" key={t.name}>
+                <div className="stars">★★★★★</div>
+                <p className="quote">"{t.quote}"</p>
+                <div className="testimonial-name">— {t.name}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

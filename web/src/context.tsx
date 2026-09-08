@@ -1,7 +1,29 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { api, Config, Admin } from "./api";
 
-const DEFAULT_CONFIG: Config = { businessName: "Gaby's Hair Studio", adminName: "Gaby", theme: "cream" };
+const DEFAULT_CONFIG: Config = {
+  businessName: "Gaby's Hair Studio",
+  adminName: "Gaby",
+  theme: "cream",
+  heroTagline: "Beautiful hair, booked in minutes.",
+  heroLede:
+    "Gaby's Hair Studio is a quiet, cream-toned studio for cuts, colour, and styling. See what's on offer, pick a time that suits you, and we'll take it from there.",
+  aboutBio:
+    "I opened Gaby's Hair Studio to slow things down — one client at a time, in a calm space, with time taken to actually listen to what you want. Every appointment below is a real open slot in my diary, so book whenever suits.",
+  hoursLine1: "Open Tuesday – Saturday",
+  hoursLine2: "By appointment only",
+  testimonials: [
+    { quote: "Booked in thirty seconds and the colour was exactly what I asked for. Can't go back to phone bookings now.", name: "Freya M." },
+    { quote: "Calm, unrushed, and genuinely lovely results. It feels like a proper treat every time.", name: "Priya S." },
+    { quote: "Loved seeing the price before I booked — no awkward surprises at the till.", name: "Aisha K." },
+  ],
+  trustStats: [
+    { value: "8+", label: "Years experience" },
+    { value: "500+", label: "Happy clients" },
+    { value: "5.0★", label: "Average rating" },
+    { value: "100%", label: "Booked online" },
+  ],
+};
 
 const FAVICONS: Record<string, string> = {
   cream: "💇",

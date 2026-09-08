@@ -17,12 +17,53 @@ app.use(cookieParser());
 
 const VALID_THEMES = ["cream", "obsidian"];
 
+// The site's copy (not just its services/prices/colour) is configurable
+// per deployment too, the same way — an env var override with a default
+// that reproduces Gaby's original hardcoded content exactly, so existing
+// deployments that don't set these are unaffected.
+const DEFAULT_TESTIMONIALS = [
+  { quote: "Booked in thirty seconds and the colour was exactly what I asked for. Can't go back to phone bookings now.", name: "Freya M." },
+  { quote: "Calm, unrushed, and genuinely lovely results. It feels like a proper treat every time.", name: "Priya S." },
+  { quote: "Loved seeing the price before I booked — no awkward surprises at the till.", name: "Aisha K." },
+];
+
+const DEFAULT_TRUST_STATS = [
+  { value: "8+", label: "Years experience" },
+  { value: "500+", label: "Happy clients" },
+  { value: "5.0★", label: "Average rating" },
+  { value: "100%", label: "Booked online" },
+];
+
+function parseJsonEnv<T>(name: string, fallback: T): T {
+  const raw = process.env[name];
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw) as T;
+  } catch (err) {
+    console.error(`${name} is set but isn't valid JSON — falling back to the default.`, err);
+    return fallback;
+  }
+}
+
 app.get("/api/config", (_req, res) => {
   const theme = process.env.THEME || "cream";
+  const businessName = process.env.BUSINESS_NAME || "Gaby's Hair Studio";
+  const adminName = process.env.ADMIN_NAME || "Gaby";
   res.json({
-    businessName: process.env.BUSINESS_NAME || "Gaby's Hair Studio",
-    adminName: process.env.ADMIN_NAME || "Gaby",
+    businessName,
+    adminName,
     theme: VALID_THEMES.includes(theme) ? theme : "cream",
+    heroTagline: process.env.HERO_TAGLINE || "Beautiful hair, booked in minutes.",
+    heroLede:
+      process.env.HERO_LEDE ||
+      `${businessName} is a quiet, cream-toned studio for cuts, colour, and styling. See what's on offer, pick a time that suits you, and we'll take it from there.`,
+    aboutBio:
+      process.env.ABOUT_BIO ||
+      `I opened ${businessName} to slow things down — one client at a time, in a calm space, with time taken to actually listen to what you want. Every appointment below is a real open slot in my diary, so book whenever suits.`,
+    hoursLine1: process.env.HOURS_LINE1 || "Open Tuesday – Saturday",
+    hoursLine2: process.env.HOURS_LINE2 || "By appointment only",
+    testimonials: parseJsonEnv("TESTIMONIALS", DEFAULT_TESTIMONIALS),
+    trustStats: parseJsonEnv("TRUST_STATS", DEFAULT_TRUST_STATS),
   });
 });
 

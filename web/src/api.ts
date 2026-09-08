@@ -15,10 +15,27 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   return body as T;
 }
 
+export interface Testimonial {
+  quote: string;
+  name: string;
+}
+
+export interface TrustStat {
+  value: string;
+  label: string;
+}
+
 export interface Config {
   businessName: string;
   adminName: string;
   theme: string;
+  heroTagline: string;
+  heroLede: string;
+  aboutBio: string;
+  hoursLine1: string;
+  hoursLine2: string;
+  testimonials: Testimonial[];
+  trustStats: TrustStat[];
 }
 
 export interface Service {
