@@ -24,11 +24,11 @@ export default function AdminLayout() {
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
-        <div>
+        <div className="admin-brand-block">
           <div className="brand" style={{ marginBottom: 4 }}>
             {businessName}
           </div>
-          <span className="muted">Admin</span>
+          <span className="muted admin-brand-sub">Admin</span>
         </div>
         <nav>
           <NavLink to="/admin/bookings" className={({ isActive }) => (isActive ? "active" : "")}>
@@ -41,8 +41,8 @@ export default function AdminLayout() {
             Services & prices
           </NavLink>
         </nav>
-        <div style={{ marginTop: "auto" }}>
-          <div className="muted" style={{ marginBottom: 10 }}>
+        <div className="admin-account-block" style={{ marginTop: "auto" }}>
+          <div className="muted admin-account-name" style={{ marginBottom: 10 }}>
             Logged in as {admin.name}
           </div>
           <button className="btn btn-secondary btn-sm" onClick={handleLogout}>

@@ -14,14 +14,18 @@ router.get("/", async (_req, res) => {
   res.json(slots);
 });
 
-// Admin: all upcoming slots (open + booked), with booking info.
+// Admin: all upcoming slots (open + booked), with the slot's current
+// (non-declined) booking, if any — a slot can have older declined
+// bookings in its history, but at most one active one at a time.
 router.get("/all", requireAdmin, async (_req, res) => {
   const slots = await prisma.slot.findMany({
     where: { startsAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } },
     orderBy: { startsAt: "asc" },
-    include: { booking: { include: { service: true } } },
+    include: {
+      bookings: { where: { status: { not: "DECLINED" } }, include: { service: true } },
+    },
   });
-  res.json(slots);
+  res.json(slots.map(({ bookings, ...slot }) => ({ ...slot, booking: bookings[0] ?? null })));
 });
 
 const slotSchema = z.object({

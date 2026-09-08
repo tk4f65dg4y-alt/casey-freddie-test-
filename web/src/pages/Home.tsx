@@ -36,7 +36,25 @@ export default function Home() {
               View services & prices
             </a>
           </div>
-          <div className="hero-divider" />
+        </div>
+      </section>
+
+      <section className="trust-strip container">
+        <div className="trust-stat">
+          <strong>8+</strong>
+          <span>Years experience</span>
+        </div>
+        <div className="trust-stat">
+          <strong>500+</strong>
+          <span>Happy clients</span>
+        </div>
+        <div className="trust-stat">
+          <strong>5.0★</strong>
+          <span>Average rating</span>
+        </div>
+        <div className="trust-stat">
+          <strong>100%</strong>
+          <span>Booked online</span>
         </div>
       </section>
 
@@ -45,6 +63,9 @@ export default function Home() {
           <div className="section-head">
             <span className="hero-eyebrow">Services & prices</span>
             <h2>Packages</h2>
+            <div className="ornament">
+              <span>◆</span>
+            </div>
             <p>Every price is shown up front — no surprises when you sit down.</p>
           </div>
 
@@ -56,6 +77,7 @@ export default function Home() {
             <div className="services-grid">
               {services.map((s) => (
                 <div className="service-card" key={s.id}>
+                  <span className="service-icon">{s.name.trim().charAt(0).toUpperCase()}</span>
                   <div className="service-card-top">
                     <h3>{s.name}</h3>
                     <span className="service-price">{formatPrice(s.priceCents)}</span>
@@ -89,6 +111,35 @@ export default function Home() {
       </section>
 
       <section className="section section-alt">
+        <div className="container">
+          <div className="section-head">
+            <span className="hero-eyebrow">Reviews</span>
+            <h2>Kind words</h2>
+            <div className="ornament">
+              <span>◆</span>
+            </div>
+          </div>
+          <div className="testimonial-grid">
+            <div className="testimonial-card">
+              <div className="stars">★★★★★</div>
+              <p className="quote">"Booked in thirty seconds and the colour was exactly what I asked for. Can't go back to phone bookings now."</p>
+              <div className="testimonial-name">— Freya M.</div>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">★★★★★</div>
+              <p className="quote">"Calm, unrushed, and genuinely lovely results. It feels like a proper treat every time."</p>
+              <div className="testimonial-name">— Priya S.</div>
+            </div>
+            <div className="testimonial-card">
+              <div className="stars">★★★★★</div>
+              <p className="quote">"Loved seeing the price before I booked — no awkward surprises at the till."</p>
+              <div className="testimonial-name">— Aisha K.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
         <div className="container" style={{ textAlign: "center" }}>
           <h2>Ready when you are</h2>
           <p style={{ maxWidth: 480, margin: "16px auto 30px" }}>
