@@ -63,5 +63,7 @@ Studio"). The root `npm run build` builds both the web app and the server;
 serves the built frontend and the API from one process/port.
 
 On a platform with a separate pre-deploy step (e.g. Railway), run the
-migration and seed there, in that order:
-`npx prisma migrate deploy --schema=server/prisma/schema.prisma && npm run seed --prefix server`.
+migration and seed there, in that order — using the repo's own installed
+Prisma binary rather than `npx prisma` (which fetches an unrelated latest
+version from the registry and doesn't understand this schema/CLI):
+`server/node_modules/.bin/prisma migrate deploy --schema=server/prisma/schema.prisma && npm run seed --prefix server`.
