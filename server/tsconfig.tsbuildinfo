@@ -1,0 +1,1 @@
+{"root":["./src/auth.ts","./src/db.ts","./src/index.ts","./src/routes/auth.ts","./src/routes/bookings.ts","./src/routes/services.ts","./src/routes/slots.ts"],"version":"5.9.3"}
