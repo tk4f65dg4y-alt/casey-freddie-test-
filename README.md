@@ -53,14 +53,27 @@ npm run dev               # starts the Vite dev server on :5173, proxying /api t
 Log in to the admin dashboard at `/admin/login` with `ADMIN_EMAIL` /
 `ADMIN_PASSWORD`.
 
-## Deploying
+## Deploying a new business on this same codebase
 
-Set these environment variables on the server service: `DATABASE_URL` (from
-your Postgres service), `JWT_SECRET` (a long random string), `ADMIN_EMAIL`,
-`ADMIN_PASSWORD`, `ADMIN_NAME`, `BUSINESS_NAME` (defaults to "Gaby's Hair
-Studio"). The root `npm run build` builds both the web app and the server;
-`npm start` runs `prisma migrate deploy` then starts the server, which
-serves the built frontend and the API from one process/port.
+This app is meant to be redeployed as its own instance per business (own
+Railway project, own Postgres, own domain) — not edited per customer. Set
+these environment variables on the service:
+
+- `DATABASE_URL` (from that deployment's own Postgres)
+- `JWT_SECRET` (a long random string, unique per deployment)
+- `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `ADMIN_NAME` — the one login for this business
+- `BUSINESS_NAME` — shown in the nav/footer/hero (defaults to "Gaby's Hair Studio")
+- `SEED_SERVICES` (optional) — a JSON array of the packages this business
+  offers, only used the first time the database is seeded (existing services
+  are never overwritten). Each item is
+  `{ "name": "...", "description": "...", "priceCents": 4500, "durationMin": 60 }`.
+  Omit it to get the default hairdresser services. Example for a personal
+  trainer:
+  `[{"name":"1-to-1 Session","description":"A full-hour personal training session.","priceCents":4500,"durationMin":60}]`
+
+The root `npm run build` builds both the web app and the server; `npm start`
+runs `prisma migrate deploy` then starts the server, which serves the built
+frontend and the API from one process/port.
 
 On a platform with a separate pre-deploy step (e.g. Railway), run the
 migration and seed there, in that order — using the repo's own installed
