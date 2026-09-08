@@ -7,7 +7,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json && prisma generate",
     "start": "prisma migrate deploy && node dist/index.js",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "fix-service": "tsx prisma/fix-service.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",

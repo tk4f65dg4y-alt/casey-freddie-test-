@@ -104,6 +104,20 @@ The root `npm run build` builds both the web app and the server; `npm start`
 runs `prisma migrate deploy` then starts the server, which serves the built
 frontend and the API from one process/port.
 
+## Fixing a service after it's already seeded
+
+`seed.ts` only creates services once — it never touches them again on later
+deploys, since an admin may have edited them by hand since. To correct a
+mistake in a service that's already live (wrong price, a description that
+reads oddly, etc.) without going through the admin UI, set `SERVICE_FIX` to
+a JSON array of `{ "name": "...", "description"?, "priceCents"?, "durationMin"? }`
+— each entry is matched by the service's exact current name and updated
+with whichever fields are given — and run `npm run fix-service --prefix server`
+(or add it to `preDeployCommand` for one deploy). It's a no-op with no
+`SERVICE_FIX` set, so it's safe to leave wired in, but unset it again after
+use so a later deploy doesn't silently re-overwrite someone's own edit to
+that service.
+
 On a platform with a separate pre-deploy step (e.g. Railway), run the
 migration and seed there, in that order — using the repo's own installed
 Prisma binary rather than `npx prisma` (which fetches an unrelated latest
